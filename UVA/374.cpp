@@ -1,4 +1,4 @@
-// https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=310
+//https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=310
 
 #include <bits/stdc++.h>
 #define PI 3.1415926535897932384626433832795
