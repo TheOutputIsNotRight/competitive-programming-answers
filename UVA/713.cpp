@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 #define PI 3.1415926535897932384626433832795
 #define loop(i,n) for(i = 0; i < n; i++)
+#define revloop(i,n) for(i = n; i >= 0; i--)
 #define sz (int) 1e5 + 5
 #define ll long long
 
@@ -110,25 +111,6 @@ string trim(string x) {
 }
 
 int main() {
-    /*
-    int target[17];
-    str_arri(string("19992138712973897893178931213876"), target);
-    printarri(target, 17);
-
-    fill_n(target, 17, 0);
-    target[0] = 1999;
-    cout << arri_str(target) << endl;
-
-    int target2[17];
-    fill_n(target2, 17, 0);
-    target2[0] = 5;
-
-    int target3[17];
-    fill_n(target3, 17, 0);
-
-    add(target, target2, target3);
-    printarri(target3, 17);
-    */
     #ifndef ONLINE_JUDGE
         freopen("F:\\Programming\\Competitve Programming\\Answers\\input.txt", "r", stdin);
         freopen("F:\\Programming\\Competitve Programming\\Answers\\output.txt", "w", stdout);
@@ -137,26 +119,52 @@ int main() {
     int t;
     cin >> t;
     while(t--) {
-        string x,y;
-        cin >> x >> y;
+        string a,b;
+        cin >> a >> b;
 
-        reverse(x.begin(), x.end());
-        reverse(y.begin(), y.end());
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
 
-        int a[17], b[17];
+        int sum[300];
+        fill_n(sum, 300, 0);
 
-        str_arri(x, a);
-        str_arri(y, b);
+        int i,j;
+        loop(i, a.size()) {
+            sum[i] = a[i] - '0';
+        }
 
-        int sum[17];
+        loop(i, b.size()) {
+            sum[i] += b[i] - '0';
+        }
 
-        add(a, b, sum);
+        for(i = 0; i <= max(a.size(), b.size())+1; i++) {
+            if(sum[i] >= 10) {
+                sum[i+1]++;
+                sum[i] = sum[i] % 10;
+            }
+        }
 
-        string result = arri_str(sum);
-        result = trim(result);
+        int finish = 0;
+        revloop(i, max(a.size(), b.size())+1) {
+            if(sum[i] != 0) {
+                finish = i;
+                break;
+            }
+        }
+
+        int start = 0;
+        while(sum[start] == 0) {
+            start++;
+        }
+
+        string result;
+        for(int i = start; i <= finish; i++) {
+            result.push_back((char) (sum[i] + '0'));
+        }
+        cout << a << " + " << b << " = " << result << endl;
         reverse(result.begin(), result.end());
 
-        cout << result << endl;
+        //cout << result << endl;
     }
     
     return 0;
